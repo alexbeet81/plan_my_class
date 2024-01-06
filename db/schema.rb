@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_06_152108) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_06_211839) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_152108) do
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
   end
 
+  create_table "classrooms_students", id: false, force: :cascade do |t|
+    t.bigint "classroom_id", null: false
+    t.bigint "student_id", null: false
+    t.index ["classroom_id", "student_id"], name: "index_classrooms_students_on_classroom_id_and_student_id"
+    t.index ["student_id", "classroom_id"], name: "index_classrooms_students_on_student_id_and_classroom_id"
+  end
+
   create_table "seating_charts", force: :cascade do |t|
     t.string "title"
     t.integer "rows"
@@ -32,6 +39,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_152108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["classroom_id"], name: "index_seating_charts_on_classroom_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teachers", force: :cascade do |t|

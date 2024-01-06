@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :classrooms
   resources :seating_charts
+  resources :students
   # Defines the root path route ("/")
   root "home#index"
 end

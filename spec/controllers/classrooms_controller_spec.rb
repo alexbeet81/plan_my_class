@@ -65,7 +65,7 @@ RSpec.describe ClassroomsController, type: :controller do
 
   describe 'GET #edit' do
     it 'renders a successful response' do
-      get :edit
+      get :edit, params: { id: classroom.id }
       expect(response).to be_successful
     end
   end
