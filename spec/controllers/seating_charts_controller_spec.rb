@@ -57,7 +57,7 @@ RSpec.describe SeatingChartsController, type: :controller do
 
   describe 'GET #edit' do
     it 'renders a successful response' do
-      get :edit
+      get :edit, params: { id: seating_chart.id }
       expect(response).to be_successful
     end
   end
@@ -117,7 +117,8 @@ RSpec.describe SeatingChartsController, type: :controller do
     end
     
     context 'with unsuccessful conditions' do
-      let!(:seating_chart) { create(:seating_chart) }
+      let!(:classroom) { create(:classroom) }
+      let!(:seating_chart) { create(:seating_chart, rows: classroom.rows, columns: classroom.columns) }
 
       before do
         allow_any_instance_of(SeatingChart).to receive(:destroy).and_return(false)

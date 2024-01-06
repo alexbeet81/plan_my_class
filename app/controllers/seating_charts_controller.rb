@@ -1,6 +1,6 @@
 class SeatingChartsController < ApplicationController
   before_action :authenticate_teacher!
-  before_action :set_seating_chart, only: [:edit, :update]
+  before_action :set_seating_chart, only: [:edit, :update, :destroy]
 
   def new
     @seating_chart = SeatingChart.new
