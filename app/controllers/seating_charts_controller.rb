@@ -1,0 +1,2 @@
+class SeatingChartsController < ApplicationController
+end
