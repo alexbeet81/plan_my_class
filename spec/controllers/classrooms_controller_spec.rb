@@ -5,6 +5,7 @@ RSpec.describe ClassroomsController, type: :controller do
   let(:classroom) { create(:classroom) }
   let(:valid_attributes) { { name: 'Math 101', rows: 5, columns: 5, teacher_id: teacher.id } }
   let(:invalid_attributes) { { name: '', rows: 5, columns: 5, teacher_id: teacher.id } }
+  let(:zero_classroom) { { name: 'zero classrom', rows: 0, columns: 0, teacher_id: teacher.id} }
 
   before do
     sign_in teacher
@@ -52,6 +53,21 @@ RSpec.describe ClassroomsController, type: :controller do
         expect(response).to render_template(:new)
       end
     end
+
+    context 'with classroom size of zero' do
+      it 'does not create a new classroom' do
+        expect {
+          post :create, params: { classroom: zero_classroom }
+        }.to change(Classroom, :count).by(0)
+      end
+    end
+  end
+
+  describe 'GET #edit' do
+    it 'renders a successful response' do
+      get :edit
+      expect(response).to be_successful
+    end
   end
 
   describe 'PATCH #update' do
@@ -72,6 +88,18 @@ RSpec.describe ClassroomsController, type: :controller do
 
       it 'renders the :edit template' do
         post :update, params: { id: classroom.id, classroom: invalid_attributes }
+        expect(response).to render_template(:edit)
+      end
+    end
+
+    context 'with classroom size of zero' do
+      it 'renders a successful response' do
+        patch :update, params: { id: classroom.id, classroom: zero_classroom }
+        expect(response).to render_template(:edit)
+      end
+
+      it 'renders the :edit template' do
+        post :update, params: { id: classroom.id, classroom: zero_classroom }
         expect(response).to render_template(:edit)
       end
     end
