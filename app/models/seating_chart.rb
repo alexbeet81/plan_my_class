@@ -19,8 +19,9 @@
 #  fk_rails_...  (classroom_id => classrooms.id)
 #
 class SeatingChart < ApplicationRecord
-  belongs_to :classroom
+  belongs_to :classroom, dependant: :destroy
 
+  # TODO: validate that the seating chart is not larger than the classroom to which it belongs.
   validates :rows, :columns, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :title, presence: true
 end
