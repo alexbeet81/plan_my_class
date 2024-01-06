@@ -11,5 +11,13 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "associations" do
+    it "can belong to many classrooms" do
+      student = create(:student)
+      classrooms = create_list(:classroom, 2)
+      student.classrooms << classrooms
+
+      expect(student.classrooms.count).to eq(2)
+    end
+  end
 end

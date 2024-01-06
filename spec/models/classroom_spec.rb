@@ -42,4 +42,14 @@ RSpec.describe Classroom, type: :model do
     classroom = Classroom.new(name: 'Math 101', rows: 5, teacher: teacher)
     expect(classroom).not_to be_valid
   end
+
+  describe "associations" do
+    it "can have many students" do
+      classroom = create(:classroom)
+      students = create_list(:student, 3)
+      classroom.students << students
+
+      expect(classroom.students.count).to eq(3)
+    end
+  end
 end
