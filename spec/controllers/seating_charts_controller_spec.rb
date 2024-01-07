@@ -107,9 +107,12 @@ RSpec.describe SeatingChartsController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    let!(:new_classroom) { create(:classroom, rows: 5, columns: 5) }
+    let!(:seating_chart) { create(:seating_chart, rows: 5, columns: 5, classroom: new_classroom) }
+
     context 'with successful conditions' do
-      it 'destroys the requested classroom' do
-        seating_chart = create(:seating_chart, classroom: classroom)
+      it 'destroys the requested seating chart' do
+        seating_chart = create(:seating_chart, rows: 5, columns: 5, classroom: new_classroom)
         expect {
           delete :destroy, params: { id: seating_chart.id }
         }.to change(SeatingChart, :count).by(-1)
@@ -117,14 +120,11 @@ RSpec.describe SeatingChartsController, type: :controller do
     end
     
     context 'with unsuccessful conditions' do
-      let!(:classroom) { create(:classroom) }
-      let!(:seating_chart) { create(:seating_chart, rows: classroom.rows, columns: classroom.columns) }
-
       before do
         allow_any_instance_of(SeatingChart).to receive(:destroy).and_return(false)
       end
 
-      it 'does not delete the classroom' do
+      it 'does not delete the seating chart' do
         expect {
           delete :destroy, params: { id: seating_chart.id }
         }.not_to change(SeatingChart, :count)
