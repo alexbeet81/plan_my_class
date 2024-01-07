@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   resources :seating_charts
   resources :students
   # Defines the root path route ("/")
-  root "home#index"
+  root "classrooms#index"
 end
