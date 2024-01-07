@@ -20,7 +20,7 @@
 #
 class SeatingChart < ApplicationRecord
   belongs_to :classroom
-  has_many :tables, dependent: :destroy
+  has_many :desks, dependent: :destroy
 
   # TODO: validate that the seating chart is not larger than the classroom to which it belongs.
   validates :rows, :columns, presence: true, numericality: { only_integer: true, greater_than: 0 }

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: tables
+# Table name: desks
 #
 #  id               :bigint           not null, primary key
 #  column_position  :string
@@ -12,16 +12,17 @@
 #
 # Indexes
 #
-#  index_tables_on_seating_chart_id  (seating_chart_id)
-#  index_tables_on_student_id        (student_id)
+#  index_desks_on_seating_chart_id  (seating_chart_id)
+#  index_desks_on_student_id        (student_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (seating_chart_id => seating_charts.id)
 #  fk_rails_...  (student_id => students.id)
 #
-require 'rails_helper'
+class Desk < ApplicationRecord
+  belongs_to :seating_chart
+  belongs_to :student, optional: true
 
-RSpec.describe Table, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  validates :row_position, :column_position, presence: true
 end

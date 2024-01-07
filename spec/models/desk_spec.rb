@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: tables
+# Table name: desks
 #
 #  id               :bigint           not null, primary key
 #  column_position  :string
@@ -12,19 +12,16 @@
 #
 # Indexes
 #
-#  index_tables_on_seating_chart_id  (seating_chart_id)
-#  index_tables_on_student_id        (student_id)
+#  index_desks_on_seating_chart_id  (seating_chart_id)
+#  index_desks_on_student_id        (student_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (seating_chart_id => seating_charts.id)
 #  fk_rails_...  (student_id => students.id)
 #
-FactoryBot.define do
-  factory :table do
-    row_position { "MyString" }
-    column_position { "MyString" }
-    seating_chart { nil }
-    student { nil }
-  end
+require 'rails_helper'
+
+RSpec.describe Desk, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
