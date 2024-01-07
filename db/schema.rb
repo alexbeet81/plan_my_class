@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_06_234126) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_07_154624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_234126) do
     t.index ["student_id", "classroom_id"], name: "index_classrooms_students_on_student_id_and_classroom_id"
   end
 
+  create_table "desks", force: :cascade do |t|
+    t.string "row_position"
+    t.string "column_position"
+    t.bigint "seating_chart_id", null: false
+    t.bigint "student_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["seating_chart_id"], name: "index_desks_on_seating_chart_id"
+    t.index ["student_id"], name: "index_desks_on_student_id"
+  end
+
   create_table "seating_charts", force: :cascade do |t|
     t.string "title"
     t.integer "rows"
@@ -48,17 +59,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_234126) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tables", force: :cascade do |t|
-    t.string "row_position"
-    t.string "column_position"
-    t.bigint "seating_chart_id", null: false
-    t.bigint "student_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["seating_chart_id"], name: "index_tables_on_seating_chart_id"
-    t.index ["student_id"], name: "index_tables_on_student_id"
-  end
-
   create_table "teachers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -72,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_06_234126) do
   end
 
   add_foreign_key "classrooms", "teachers"
+  add_foreign_key "desks", "seating_charts"
+  add_foreign_key "desks", "students"
   add_foreign_key "seating_charts", "classrooms"
-  add_foreign_key "tables", "seating_charts"
-  add_foreign_key "tables", "students"
 end

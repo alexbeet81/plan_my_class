@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: tables
+# Table name: desk
 #
 #  id               :bigint           not null, primary key
 #  column_position  :string
@@ -20,9 +20,11 @@
 #  fk_rails_...  (seating_chart_id => seating_charts.id)
 #  fk_rails_...  (student_id => students.id)
 #
-class Table < ApplicationRecord
-  belongs_to :seating_chart
-  belongs_to :student, optional: true
-
-  validates :row_position, :column_position, presence: true
+FactoryBot.define do
+  factory :desk do
+    row_position { "MyString" }
+    column_position { "MyString" }
+    seating_chart { nil }
+    student { nil }
+  end
 end

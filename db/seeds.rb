@@ -4,7 +4,7 @@ Teacher.destroy_all
 Classroom.destroy_all
 SeatingChart.destroy_all
 Student.destroy_all
-Table.destroy_all
+Desk.destroy_all
 
 puts "Creating Teacher..."
 teacher = Teacher.create!(email: 'alex@alex.com', password: '123456', password_confirmation: '123456')
@@ -27,9 +27,9 @@ puts "Created teacher #{teacher.id} - #{teacher.email}"
     ('A'..'Z').first(seating_chart.columns).each do |letter|
       (1..seating_chart.rows).to_a.each do |number|
         student = Student.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name) 
-        table = Table.create!(row_position: letter, column_position: number, seating_chart: seating_chart, student: student)
+        desks = Desk.create!(row_position: letter, column_position: number, seating_chart: seating_chart, student: student)
 
-        puts "Created student #{student.id} - #{student.first_name} #{student.last_name} at table #{table.row_position}#{table.column_position}"
+        puts "Created student #{student.id} - #{student.first_name} #{student.last_name} at table #{desks.row_position}#{desks.column_position}"
       end
     end
   end
