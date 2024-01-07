@@ -21,6 +21,7 @@
 class Classroom < ApplicationRecord
   belongs_to :teacher
   has_and_belongs_to_many :students
+  has_many :seating_charts, dependent: :destroy
 
   validates :name, presence: true
   validates :rows, :columns, presence: true,
