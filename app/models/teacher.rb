@@ -22,5 +22,5 @@ class Teacher < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :classroomss
+  has_many :classrooms, dependent: :destroy
 end
