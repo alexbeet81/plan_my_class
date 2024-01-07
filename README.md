@@ -8,7 +8,8 @@ Things you may want to cover:
 * Ruby version
 3.2.2
 
-* Tailwind
+* Tailwind V 3
+docs: https://tailwindcss.com/docs
 During development run => rails tailwindcss:watch 
 
 * System dependencies
