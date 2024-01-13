@@ -2,20 +2,23 @@
 #
 # Table name: classrooms
 #
-#  id         :bigint           not null, primary key
-#  columns    :integer
-#  name       :string
-#  rows       :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  teacher_id :bigint           not null
+#  id                       :bigint           not null, primary key
+#  columns                  :integer
+#  name                     :string
+#  rows                     :integer
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  current_seating_chart_id :bigint
+#  teacher_id               :bigint           not null
 #
 # Indexes
 #
-#  index_classrooms_on_teacher_id  (teacher_id)
+#  index_classrooms_on_current_seating_chart_id  (current_seating_chart_id)
+#  index_classrooms_on_teacher_id                (teacher_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (current_seating_chart_id => seating_charts.id)
 #  fk_rails_...  (teacher_id => teachers.id)
 #
 require 'rails_helper'

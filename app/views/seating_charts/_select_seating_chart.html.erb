@@ -1,0 +1,6 @@
+<div data-controller="select-seating-chart">
+  <%= form_with url: update_current_seating_chart_classroom_path(@classroom), method: :patch, data: { turbo_frame: "displayed_seating_chart", "select-seating-chart-target": "form" } do %>
+    <label for="select-seating-charts" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Change seating chart</label>
+    <%= select_tag :current_seating_chart_id, options_from_collection_for_select(@seating_charts, :id, :title, @seating_chart.id), class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", data: { action: "change->select-seating-chart#submitForm" } %>
+  <% end %>
+</div>

@@ -1,3 +1,6 @@
-<div>
-  <p><%= @classroom.name %></p>
-</div>
+<p><%= @classroom.name %></p>
+<%= render partial: 'seating_charts/select_seating_chart' %>
+
+<%= turbo_frame_tag :current_seating_chart do %>
+  <%= render partial: 'seating_charts/seating_chart' %>
+<% end %>
